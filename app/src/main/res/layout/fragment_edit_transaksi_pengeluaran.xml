@@ -1,0 +1,141 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_left"
+            android:contentDescription="Back"
+            android:paddingEnd="8dp"
+            android:clickable="true" />
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaksi"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+
+        <Button
+            style="@style/Button.NoRipple"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:textSize="13sp"
+            android:layout_weight="1"
+            android:text="Pengeluaran"
+            android:textColor="@color/red"
+            android:layout_marginEnd="8dp"
+            android:padding="1dp"
+            android:background="@drawable/button_border_red" />
+    </LinearLayout>
+
+
+
+    <!-- Tanggal -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tanggal"
+        android:textStyle="bold"
+        android:paddingTop="16dp" />
+
+    <EditText
+        android:id="@+id/et_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pilih tanggal"
+        android:focusable="false"
+        android:clickable="true"
+        android:backgroundTint="@color/red"
+        android:padding="8dp" />
+
+    <!-- Total -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:textStyle="bold"
+        android:paddingTop="16dp" />
+
+    <EditText
+        android:id="@+id/et_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan total"
+        android:inputType="number"
+        android:backgroundTint="@color/red"
+        android:padding="8dp" />
+
+    <!-- Kategori -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kategori"
+        android:textStyle="bold"
+        android:paddingTop="16dp" />
+
+    <!-- TextInputLayout with underline and dropdown -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundMode="outline"
+        app:endIconMode="dropdown_menu"
+        app:boxStrokeColor="@color/red"
+        android:padding="0dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/sp_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pilih kategori"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            android:backgroundTint="@android:color/transparent"
+            android:padding="8dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Tombol Simpan -->
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simpan"
+        android:backgroundTint="@color/red"
+        android:textColor="@android:color/white"
+        android:padding="12dp"
+        android:layout_marginTop="24dp" />
+    <Button
+        style="@style/Button.NoRipple"
+        android:id="@+id/btn_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:background="@drawable/button_border_red"
+        android:textColor="@color/black"
+        android:padding="12dp"
+        android:layout_marginTop="24dp" />
+</LinearLayout>

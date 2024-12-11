@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Budgy</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+    <string name="stat">Stat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="kategori_pengeluaran">
+        <item>Makanan</item>
+        <item>Transportasi</item>
+        <item>Belanja</item>
+        <item>Tagihan</item>
+        <item>Hiburan</item>
+        <item>Kesehatan</item>
+        <item>Lain-lain</item>
+    </string-array>
+    <string-array name="kategori_pendapatan">
+        <item>Gaji</item>
+        <item>Bonus</item>
+        <item>Freelance</item>
+        <item>Uang Jajan</item>
+        <item>Pendapatan Lainnya</item>
+    </string-array>
+</resources>
