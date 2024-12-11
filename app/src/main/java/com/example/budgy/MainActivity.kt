@@ -17,11 +17,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inisialisasi View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Mengakses elemen dengan binding
         val bottomNavigationView = binding.bottomNavMenu
         val fabAdd = binding.fabAdd
 
@@ -59,9 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         fabAdd.setOnClickListener {
-            // Panggil fragment form transaksi
             loadFragment(TransaksiPengeluaranFragment())
-            // Sembunyikan FAB saat berada di halaman transaksi
             fabAdd.hide()
         }
     }
@@ -70,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null) // Tambahkan ke backstack untuk navigasi balik
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 }

@@ -19,22 +19,16 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        // Menemukan tombol logout
         val btnLogout: Button = view.findViewById(R.id.btnLogout)
 
-        // Menambahkan listener untuk tombol logout
         btnLogout.setOnClickListener {
-            // Menghapus status login
             PreferenceHelper.saveIsLoggedIn(requireContext(), false)
 
-            // Pindah ke aktivitas RegisterActivity (atau SplashActivity jika Anda lebih memilihnya)
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
 
-            // Menghentikan aktivitas saat ini (optional)
             activity?.finish()
         }
 

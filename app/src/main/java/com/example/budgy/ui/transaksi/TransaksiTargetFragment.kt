@@ -28,7 +28,6 @@ class TransaksiTargetFragment : Fragment() {
         _binding = FragmentTransaksiTargetBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Handle tombol back
         binding.btnBack.setOnClickListener {
             val homeFragment = HomeFragment()
             parentFragmentManager.beginTransaction()
@@ -37,11 +36,24 @@ class TransaksiTargetFragment : Fragment() {
                 .commit()
         }
 
-        // Simpan target
+        binding.btnPendapatan.setOnClickListener {
+            val transaksiPendapatanFragment = TransaksiPendapatanFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, transaksiPendapatanFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+        binding.btnPengeluaran.setOnClickListener {
+            val transaksiPengeluaranFragment = TransaksiPengeluaranFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, transaksiPengeluaranFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
         binding.btnSave.setOnClickListener {
             val nominalText = binding.etTotal.text.toString()
 
-            // Validasi input nominal
             val nominal = nominalText.toIntOrNull()
             if (nominal != null) {
                 postTarget(nominal)
@@ -57,17 +69,12 @@ class TransaksiTargetFragment : Fragment() {
 
     private fun postTarget(nominal: Int) {
         val apiService = ApiConfig.getApiService(requireContext())
-
-        // Dapatkan tanggal hari ini
-        val todayDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         val todayDateWithTime = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).format(Date())
-        // Buat request
         val postTargetRequest = PostTargetResponse(
             nominal = nominal,
             tanggal = todayDateWithTime
         )
 
-        // Panggil API
         apiService.postTarget(postTargetRequest).enqueue(object : Callback<PostTargetResponse> {
             override fun onResponse(
                 call: Call<PostTargetResponse>,
@@ -76,7 +83,6 @@ class TransaksiTargetFragment : Fragment() {
                 if (response.isSuccessful) {
                     Toast.makeText(requireContext(), "Target berhasil disimpan!", Toast.LENGTH_SHORT).show()
 
-                    // Kembali ke HomeFragment setelah berhasil
                     val homeFragment = HomeFragment()
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, homeFragment)

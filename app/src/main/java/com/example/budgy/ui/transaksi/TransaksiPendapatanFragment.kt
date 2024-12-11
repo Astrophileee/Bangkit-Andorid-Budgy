@@ -33,12 +33,11 @@ class TransaksiPendapatanFragment : Fragment() {
         _binding = FragmentTransaksiPendapatanBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Handle back button click
         binding.btnBack.setOnClickListener {
-            val homeFragment = HomeFragment() // Buat instance HomeFragment
+            val homeFragment = HomeFragment()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, homeFragment)
-                .addToBackStack(null) // Tambahkan ke back stack jika diperlukan
+                .addToBackStack(null)
                 .commit()
         }
 
@@ -57,10 +56,8 @@ class TransaksiPendapatanFragment : Fragment() {
                 .commit()
         }
 
-        // Setup dropdown kategori pendapatan
         setupCategoryDropdown()
 
-        // Date Picker setup
         binding.etDate.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -69,7 +66,6 @@ class TransaksiPendapatanFragment : Fragment() {
 
             val datePickerDialog = DatePickerDialog(requireContext(),
                 { _, selectedYear, selectedMonth, selectedDay ->
-                    // Format tanggal yang diinginkan (yyyy-MM-dd)
                     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                     val selectedDate = Calendar.getInstance().apply {
                         set(selectedYear, selectedMonth, selectedDay)
@@ -80,13 +76,11 @@ class TransaksiPendapatanFragment : Fragment() {
             datePickerDialog.show()
         }
 
-        // Submit data ke API
         binding.btnSave.setOnClickListener {
             val nominalText = binding.etTotal.text.toString()
             val kategoriText = binding.spCategory.text.toString()
             val tanggal = binding.etDate.text.toString()
 
-            // Pastikan nominal diubah menjadi Integer
             val nominal = nominalText.toIntOrNull()
 
             if (nominal != null && kategoriText.isNotEmpty() && tanggal.isNotEmpty()) {
@@ -106,7 +100,6 @@ class TransaksiPendapatanFragment : Fragment() {
         return view
     }
 
-    // Fungsi untuk setup dropdown kategori
     private fun setupCategoryDropdown() {
         val categories = resources.getStringArray(R.array.kategori_pendapatan)
         val adapter = ArrayAdapter(
@@ -120,14 +113,11 @@ class TransaksiPendapatanFragment : Fragment() {
         }
     }
 
-    // Fungsi untuk mengirim data pendapatan ke API
-    // Fungsi untuk mengirim data pendapatan ke API
     private fun sendPendapatanData(nominal: Int, kategoriId: Int, tanggal: String) {
 
-        // Membuat objek PostPendapatanData
         val postPendapatanData = PostPendapatanData(
             kategoriId = kategoriId,
-            nominal = nominal.toString(),  // Konversi nominal menjadi string
+            nominal = nominal.toString(),
             tanggal = tanggal
         )
 
@@ -136,10 +126,10 @@ class TransaksiPendapatanFragment : Fragment() {
             override fun onResponse(call: Call<PostPendapatanResponse>, response: Response<PostPendapatanResponse>) {
                 if (response.isSuccessful) {
                     Toast.makeText(requireContext(), "Data berhasil dikirim", Toast.LENGTH_SHORT).show()
-                    val homeFragment = HomeFragment() // Buat instance HomeFragment
+                    val homeFragment = HomeFragment()
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, homeFragment)
-                        .addToBackStack(null) // Tambahkan ke back stack jika diperlukan
+                        .addToBackStack(null)
                         .commit()
                 } else {
                     Log.e("TransaksiPendapatan", "Error: ${response.errorBody()?.string()}")

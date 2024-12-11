@@ -156,12 +156,13 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/tvRekomendasi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rp100.000"
+                        android:text="Rp0"
                         android:textSize="16sp"
                         android:textColor="@color/green"
-                        android:textStyle="bold" />
+                        android:layout_marginTop="8dp" />
 
                     <!-- Generate Button -->
                     <Button

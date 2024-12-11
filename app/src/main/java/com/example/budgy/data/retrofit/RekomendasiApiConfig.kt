@@ -7,10 +7,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiConfig {
-    private const val BASE_URL = "https://be-62882737625.asia-southeast2.run.app/"
+object RekomendasiApiConfig {
+    private const val BASE_URL = "https://ml-trial-62882737625.asia-southeast2.run.app/"
 
-    fun getApiService(context: Context): ApiService {
+    fun getApiService(context: Context): RekomendasiApiService {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -32,7 +32,6 @@ object ApiConfig {
             .client(client)
             .build()
 
-        return retrofit.create(ApiService::class.java)
+        return retrofit.create(RekomendasiApiService::class.java)
     }
 }
-

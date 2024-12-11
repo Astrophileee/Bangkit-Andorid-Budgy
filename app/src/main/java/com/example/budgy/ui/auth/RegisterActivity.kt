@@ -30,18 +30,15 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        // Inisialisasi View
         etNama = findViewById(R.id.etNama)
         etPassword = findViewById(R.id.etPassword)
         btnRegister = findViewById(R.id.btnRegister)
         progressBar = findViewById(R.id.progressBar)
 
-        // Set Listener pada Tombol Register
         btnRegister.setOnClickListener {
             val nama = etNama.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // Validasi Input
             if (nama.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Nama dan Password harus diisi", Toast.LENGTH_SHORT).show()
             } else {
@@ -51,16 +48,13 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(nama: String, password: String) {
-        // Tampilkan ProgressBar
         progressBar.visibility = View.VISIBLE
 
-        // Buat Data untuk Dikirim ke API
         val userData = mapOf(
             "nama" to nama,
             "password" to password
         )
 
-        // Panggil API menggunakan Retrofit
         val apiService = ApiConfig.getApiService(this)
         apiService.registerUser(userData).enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(
@@ -76,10 +70,9 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // Pindah ke LoginActivity untuk login dan mendapatkan token
                     val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                     startActivity(intent)
-                    finish() // Menutup RegisterActivity agar tidak kembali ke sini
+                    finish()
                 } else {
                     Toast.makeText(
                         this@RegisterActivity,

@@ -31,14 +31,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Inisialisasi View
         etNama = findViewById(R.id.etNama)
         etPassword = findViewById(R.id.etPassword)
-        btnLogin = findViewById(R.id.btnLogin) // Ubah ID jika dibutuhkan
+        btnLogin = findViewById(R.id.btnLogin)
         progressBar = findViewById(R.id.progressBar)
         tvRegister = findViewById(R.id.tvRegister)
 
-        // Aksi Login Button
         btnLogin.setOnClickListener {
             val nama = etNama.text.toString().trim()
             val password = etPassword.text.toString().trim()
@@ -59,8 +57,7 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(nama: String, password: String) {
         progressBar.visibility = View.VISIBLE
 
-        // Panggil API login (contoh dengan Retrofit) dengan menambahkan context (this)
-        val apiService = ApiConfig.getApiService(this)  // <-- Pastikan context diberikan
+        val apiService = ApiConfig.getApiService(this)
         val userData = mapOf(
             "nama" to nama,
             "password" to password
@@ -71,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
-                    // Tambahkan log untuk mengecek isi response
                     Log.d("Login", "Response: ${loginResponse?.message} - Token: ${loginResponse?.token}")
                     Toast.makeText(
                         this@LoginActivity,
@@ -79,17 +75,14 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // Simpan token ke PreferenceHelper
                     loginResponse?.token?.let {
                         PreferenceHelper.saveToken(this@LoginActivity, it)
                         Log.d("LoginActivity", "Token disimpan: $it")
                     }
 
-                    // Simpan status login dan nama pengguna
                     PreferenceHelper.saveIsLoggedIn(this@LoginActivity, true)
                     PreferenceHelper.saveUserName(this@LoginActivity, nama)
 
-                    // Pindah ke MainActivity
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
